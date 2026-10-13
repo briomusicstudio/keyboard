@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Brio · Світ клавіш</title>
+<meta name="theme-color" content="#ffd23f">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎹</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800&family=Rubik:wght@800;900&display=swap&subset=cyrillic" rel="stylesheet">
+<style>
+:root{--ink:#2a2825;--bg:#fff4dc;--y:#ffd23f;--i:#5b6cff}
+*{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
+body{font:600 clamp(15px,.6vw + 13px,18px)/1.5 Nunito,system-ui,sans-serif;color:var(--ink);background:var(--bg) radial-gradient(#2a282518 1.6px,transparent 1.7px) 0 0/24px 24px;min-height:100dvh;overflow-x:hidden}
+h1,h2,h3,.btn,.tab,small{font-family:Rubik,Nunito,system-ui,sans-serif;font-weight:900}
+:focus-visible{outline:4px solid var(--i);outline-offset:3px}
+button{font:inherit;color:inherit}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:max(12px,env(safe-area-inset-top)) clamp(12px,4vw,40px) 4px;max-width:1180px;margin:auto}
+.brand{font:900 1.3rem Rubik,sans-serif;color:var(--ink);text-decoration:none;display:flex;gap:8px;align-items:center;cursor:pointer;background:none;border:0}
+.brand span{display:grid;place-items:center;width:42px;height:42px;background:var(--y);border:3px solid var(--ink);border-radius:14px;rotate:-6deg;box-shadow:3px 3px 0 var(--ink)}
+.lang{display:flex;gap:4px;background:#fff;border:3px solid var(--ink);border-radius:999px;padding:4px}
+.lang button{border:0;background:none;border-radius:999px;padding:4px 12px;font:900 .85rem Rubik,sans-serif;cursor:pointer}
+.lang button[aria-pressed=true]{background:var(--ink);color:#fff}
+main{max-width:1180px;margin:auto;padding:12px clamp(12px,4vw,40px)}
+section[hidden]{display:none}
+.card{background:#fff;border:3px solid var(--ink);border-radius:28px;box-shadow:6px 6px 0 var(--ink)}
+.btn{border:3px solid var(--ink);background:var(--y);padding:.7em 1.4em;border-radius:999px;box-shadow:0 5px 0 var(--ink);cursor:pointer;font-size:1.05rem;transition:translate .1s,box-shadow .1s}
+.btn:active{translate:0 4px;box-shadow:0 1px 0 var(--ink)}
+.btn.sm{padding:.35em .9em;font-size:.95rem}.btn.alt{background:#fff}
+/* home */
+.hero{display:grid;gap:28px;align-items:center;padding:clamp(8px,3vw,32px) 0 28px}
+@media(min-width:860px){.hero{grid-template-columns:1fr 1fr}}
+h1{font-size:clamp(2.1rem,5.2vw + .6rem,4.4rem);line-height:1.12;margin-bottom:18px}
+mark{background:var(--y);color:inherit;padding:0 .25em;border:3px solid var(--ink);border-radius:.4em;display:inline-block;rotate:-2deg;box-shadow:4px 4px 0 var(--ink)}
+.ht p{font-size:1.15em;margin-bottom:22px;max-width:34em}
+.hp{padding:clamp(14px,3vw,26px);position:relative;rotate:1.5deg;background:#cfeeff}
+.float{position:absolute;font:900 2rem Rubik;animation:bob 3s ease-in-out infinite}
+.bento{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:20px;margin:12px 0 36px}
+.bento .card{padding:22px;display:grid;gap:6px;align-content:start}
+.bento .card:nth-child(1){background:#ffe27a;rotate:-1deg}.bento .card:nth-child(2){background:#aee6ff;rotate:1deg}.bento .card:nth-child(3){background:#ffc2e2;rotate:-.8deg}.bento .card:nth-child(4){background:#b8f2cf;rotate:1.2deg}
+.bento span{font-size:2.4rem}h3{font-size:1.3rem}
+.sh{font-size:clamp(1.5rem,3vw,2.2rem);margin-bottom:16px}
+.games{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:20px}
+.gc{text-align:left;display:grid;gap:4px;padding:20px;cursor:pointer;font:inherit;transition:translate .15s}
+.gc:hover{translate:0 -4px}.gc b{font:900 1.35rem Rubik,sans-serif}.gc i{font-style:normal;font-size:2.6rem}
+/* keyboard */
+.kb{position:relative;display:grid;grid-template-columns:repeat(7,1fr);gap:3px;height:clamp(150px,30vw,250px);background:var(--ink);border:3px solid var(--ink);border-radius:6px 6px 22px 22px;overflow:hidden}
+.wk{border:0;background:#fff;border-radius:0 0 16px 16px;display:flex;align-items:flex-end;justify-content:center;padding-bottom:10px;cursor:pointer;position:relative}
+.wk[data-s]:not(.full)::before{content:"";width:clamp(30px,5vw,44px);aspect-ratio:1;border:3px dashed #2a282566;border-radius:50%}
+.bk{position:absolute;top:0;left:calc(var(--p)/7*100% - 4.2%);width:8.4%;height:58%;background:linear-gradient(#4a453f,var(--ink));border-radius:0 0 10px 10px;box-shadow:inset 0 -7px 0 #5f5951;pointer-events:none}
+.kb.hero{height:clamp(150px,26vw,230px)}
+.nb{display:grid;place-items:center;width:clamp(46px,7vw,58px);aspect-ratio:1;border-radius:50%;background:var(--c);border:3px solid var(--ink);box-shadow:0 4px 0 var(--ink);font:900 clamp(.8rem,2vw,1.05rem) Rubik,sans-serif}
+.wk .nb{animation:pop .45s cubic-bezier(.3,1.6,.5,1)}
+.hero .wk .nb{width:clamp(30px,6vw,44px);font-size:clamp(.55rem,1.7vw,.85rem);box-shadow:none;animation:none}
+/* games */
+.gh{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;margin-bottom:14px}
+.gh h2{font-size:clamp(1.6rem,3.4vw,2.4rem)}.gh p{max-width:44em}
+.tray{display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:center;align-items:center;padding:14px 18px;margin-bottom:22px;background:#fff8d6}
+.grp{display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:center}.grp small{font-size:.75rem;opacity:.6;text-transform:uppercase;letter-spacing:.08em}
+.tok{position:relative;border:0;background:none;padding:0;cursor:grab;touch-action:none;-webkit-user-select:none;user-select:none;transition:translate .15s}
+.tok:hover{translate:0 -3px}.tok[disabled]{opacity:.3;filter:grayscale(1);cursor:default}
+.tok.on{outline:3px dashed var(--ink);outline-offset:5px;border-radius:18px}.tok.lift{opacity:.35}
+.tok.r2{width:96px;height:48px}.tok.r3{width:128px;height:48px}
+.ghost{position:fixed;left:0;top:0;margin:-28px 0 0 -28px;pointer-events:none;z-index:99;scale:1.15;rotate:-6deg;filter:drop-shadow(4px 6px 0 #2a282844)}
+.bd{position:absolute;top:-9px;right:-9px;min-width:25px;height:25px;padding:0 5px;background:var(--y);border:2px solid var(--ink);border-radius:13px;font:900 .8rem Rubik,sans-serif;display:grid;place-items:center;font-style:normal}
+.board{padding:clamp(14px,3vw,30px);background:#d9f3ff}
+.roofs{position:relative;height:clamp(58px,13vw,100px);margin-bottom:-3px}
+.rs{position:absolute;bottom:0;height:100%;border:0;background:none;padding:0 3px}
+.rf{width:100%;height:100%;display:block}
+.rb{fill:var(--c);stroke:var(--ink);stroke-width:3;vector-effect:non-scaling-stroke;stroke-linejoin:round}
+.ch{fill:#fff;stroke:var(--ink);stroke-width:3;vector-effect:non-scaling-stroke}
+.rt{fill:none;stroke:#fff9;stroke-width:3;vector-effect:non-scaling-stroke;stroke-linecap:round}
+.dots{position:absolute;left:50%;bottom:16%;translate:-50% 0;letter-spacing:.2em;font-size:clamp(.55rem,1.8vw,.95rem)}
+.rs:not(.full) .rf{opacity:.22;filter:grayscale(1)}.rs:not(.full) .rb{stroke-dasharray:6 5}.rs:not(.full) .dots{opacity:.3}
+.rs.full .rf{animation:pop .5s cubic-bezier(.3,1.6,.5,1)}
+body.arm .wk[data-s]:not(.full),body.arm .rs:not(.full){outline:3px dashed var(--ink);outline-offset:-3px}
+.hint{outline:5px solid var(--i)!important;animation:hp .5s 3}
+.shake{animation:shake .4s}
+.nv{display:flex;gap:10px;justify-content:flex-end;margin-bottom:10px}
+.sc{position:relative;display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 6px 22px;scrollbar-width:thin;scrollbar-color:var(--i) transparent}
+.oc{flex:0 0 min(88%,460px);scroll-snap-align:center;padding:clamp(14px,3vw,22px);background:#e7f4ff;position:relative}
+.oc.done{background:#d3f8e0}.oc.done::after{content:"⭐";position:absolute;top:10px;right:16px;font-size:2rem}
+.oh{display:flex;align-items:center;gap:12px;margin-bottom:10px}.an{font-size:3rem;line-height:1}
+.oc .kb{height:clamp(130px,26vw,190px)}.oc .roofs{height:clamp(52px,11vw,80px)}
+/* memory */
+.bar{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;margin-bottom:18px}.seg{display:flex;gap:8px}.mv{font:900 1.2rem Rubik,sans-serif}
+.mg{display:grid;grid-template-columns:repeat(auto-fit,minmax(clamp(74px,19vw,128px),1fr));gap:clamp(8px,2vw,16px);max-width:780px;margin:auto}
+.mc{perspective:600px;aspect-ratio:3/4;border:0;background:none;padding:0;cursor:pointer}
+.mi{position:relative;display:block;height:100%;transform-style:preserve-3d;transition:transform .45s}.mc.up .mi{transform:rotateY(180deg)}
+.fa,.fb{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border:3px solid var(--ink);border-radius:20px;display:grid;place-items:center;box-shadow:4px 4px 0 var(--ink)}
+.fa{background:repeating-linear-gradient(45deg,var(--y) 0 10px,#ffe27a 10px 20px);font-size:2.2rem}.fb{background:#fff;transform:rotateY(180deg)}
+.mc.ok .fb{background:#e0ffe9;border-color:#16a05a}.mc.ok{animation:hp .5s}
+.fb .nb{width:62%;font-size:clamp(.8rem,3vw,1.3rem)}
+.mk{position:relative;display:grid;grid-template-columns:repeat(7,1fr);width:86%;height:62%;border:2px solid var(--ink);border-radius:6px 6px 12px 12px;overflow:hidden;background:var(--ink);gap:1.5px}
+.mk i{background:#fff}.mk i.on{background:var(--c)}.mk b{position:absolute;top:0;left:calc(var(--p)/7*100% - 4.5%);width:9%;height:58%;background:var(--ink);border-radius:0 0 3px 3px}
+/* footer, dock, dialog */
+footer{max-width:1180px;margin:40px auto 0;padding:24px clamp(12px,4vw,40px) 130px;display:grid;justify-items:center;gap:14px;text-align:center}
+footer img{height:64px;width:auto}
+.soc{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.soc a{font:900 .9rem Rubik,sans-serif;color:var(--ink);text-decoration:none;border:3px solid var(--ink);border-radius:999px;padding:.4em 1.1em;box-shadow:0 4px 0 var(--ink);transition:translate .1s}
+.soc a:hover{translate:0 -2px}.soc a:nth-child(1){background:#ffc2e2}.soc a:nth-child(2){background:#aee6ff}.soc a:nth-child(3){background:var(--y)}
+footer small{font-weight:800;opacity:.75}
+.dock{position:fixed;left:50%;bottom:max(12px,env(safe-area-inset-bottom));translate:-50% 0;z-index:30;display:flex;gap:4px;padding:6px;background:#fff;border:3px solid var(--ink);border-radius:28px;box-shadow:0 5px 0 var(--ink);max-width:calc(100vw - 16px)}
+.tab{border:0;background:none;border-radius:22px;padding:6px 6px;min-width:66px;display:grid;justify-items:center;gap:2px;font-size:11px;line-height:1.1;cursor:pointer}
+.tab i{font-style:normal;font-size:22px}.tab[aria-current=page]{background:var(--y)}
+@media(min-width:640px){.tab{grid-auto-flow:column;align-items:center;font-size:14px;gap:8px;padding:10px 18px}}
+dialog{border:3px solid var(--ink);border-radius:32px;box-shadow:8px 8px 0 var(--ink);padding:clamp(24px,5vw,40px);margin:auto;width:min(92vw,460px);text-align:center;background:#fff;overflow:hidden;position:relative;color:var(--ink)}
+dialog[open]{animation:pop .5s cubic-bezier(.3,1.6,.5,1)}
+dialog::backdrop{background:#2a282499;backdrop-filter:blur(4px)}
+.burst{position:absolute;inset:-60%;z-index:-1;background:repeating-conic-gradient(#ffe27a 0 10deg,#fff 10deg 20deg);animation:spin 16s linear infinite;mask:radial-gradient(circle,#000 18%,transparent 60%);-webkit-mask:radial-gradient(circle,#000 18%,transparent 60%)}
+.wm{font-size:4.6rem;line-height:1.1;animation:bob 1s ease-in-out infinite}
+dialog h2{font-size:clamp(1.9rem,6vw,2.6rem);margin:4px 0}dialog p{font-size:1.2em;font-weight:800;margin-bottom:20px}
+dialog form{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+#cfx{position:fixed;inset:0;width:100%;height:100%;max-width:none;max-height:none;margin:0;padding:0;border:0;background:none;overflow:hidden;pointer-events:none}
+.cf{position:absolute;top:0;font:900 20px Rubik,sans-serif}
+@keyframes pop{0%{scale:.2;opacity:0}100%{scale:1;opacity:1}}
+@keyframes shake{25%{translate:-7px}75%{translate:7px}}
+@keyframes hp{50%{scale:1.07}}
+@keyframes bob{50%{translate:0 -8px}}
+@keyframes spin{to{rotate:360deg}}
+@media(prefers-reduced-motion:reduce){.burst,.wm,.float{animation:none}.wk .nb,.rs.full .rf,dialog[open],.hint,.mc.ok{animation:none}.mi{transition:none}.tok,.btn,.gc{transition:none}}
+</style>
+</head>
+<body>
+<header class="top">
+  <button class="brand" data-go="0" aria-label="Brio Keys"><span>🏰</span>Brio Keys</button>
+  <div class="lang" role="group" aria-label="Language"><button data-l="uk">UA</button><button data-l="ru">RU</button><button data-l="en">EN</button></div>
+</header>
+<main>
+  <section id="p0">
+    <div class="hero">
+      <div class="ht">
+        <h1><span data-x="h1"></span> <mark data-x="h2"></mark></h1>
+        <p data-x="sub"></p>
+        <button class="btn" data-go="1"><span data-x="cta"></span> →</button>
+      </div>
+      <div class="card hp"><span class="float" style="top:-18px;left:12px;color:#ff5a5f">♪</span><span class="float" style="top:-22px;right:30px;color:#5b6cff;animation-delay:-1s">♫</span><div id="hk"></div></div>
+    </div>
+    <div class="bento">
+      <article class="card"><span>🏠</span><h3 data-x="s1t"></h3><p data-x="s1"></p></article>
+      <article class="card"><span>🎹</span><h3 data-x="s2t"></h3><p data-x="s2"></p></article>
+      <article class="card"><span>🔍</span><h3 data-x="s3t"></h3><p data-x="s3"></p></article>
+      <article class="card"><span>🦁</span><h3 data-x="s4t"></h3><p data-x="s4"></p></article>
+    </div>
+    <h2 class="sh" data-x="play"></h2>
+    <div class="games">
+      <button class="card gc" data-go="1" style="background:#ffe27a"><i>🏡</i><b data-x="n1"></b><span data-x="g1"></span></button>
+      <button class="card gc" data-go="2" style="background:#aee6ff"><i>🐘</i><b data-x="n2"></b><span data-x="g2"></span></button>
+      <button class="card gc" data-go="3" style="background:#ffc2e2"><i>🃏</i><b data-x="n3"></b><span data-x="g3"></span></button>
+    </div>
+  </section>
+  <section id="p1" hidden></section>
+  <section id="p2" hidden></section>
+  <section id="p3" hidden></section>
+</main>
+<footer>
+  <img src="brio-logo.svg" alt="Brio Music Studio">
+  <div class="soc">
+    <a href="https://www.instagram.com/brio_musicstudio/" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://t.me/briomusicstudio" target="_blank" rel="noopener">Telegram</a>
+    <a href="https://www.tiktok.com/@brio_music_studio_" target="_blank" rel="noopener">TikTok</a>
+  </div>
+  <small>© <span id="yr"></span> Brio Music Studio · <span data-x="au"></span>: <span data-x="nm"></span></small>
+</footer>
+<nav class="dock" aria-label="Menu">
+  <button class="tab" data-go="0"><i>🏠</i><span data-x="n0"></span></button>
+  <button class="tab" data-go="1"><i>🏡</i><span data-x="n1"></span></button>
+  <button class="tab" data-go="2"><i>🦁</i><span data-x="n2"></span></button>
+  <button class="tab" data-go="3"><i>🃏</i><span data-x="n3"></span></button>
+</nav>
+<dialog id="win"><div class="burst"></div><div class="wm">🎹</div><h2 id="wt"></h2><p id="wd"></p>
+  <form method="dialog"><button class="btn alt" value="again" data-x="again"></button><button class="btn" value="ok" data-x="ok"></button></form></dialog>
+<div id="cfx" popover="manual"></div>
+
+<script>
+const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
+const L={
+uk:{n0:'Світ клавіш',n1:'Будиночки',n2:'Зоопарк октав',n3:'Мемо-клавіші',h1:'Привіт! Це наш чарівний',h2:'світ клавіш',sub:'Дізнайся, де живе кожна нотка, і подружись із піаніно. Торкайся клавіш — вони грають!',cta:'Грати!',
+s1t:'Дві й три',s1:'Чорні клавіші стоять групами: по дві та по три. Це наші дахи — за ними легко знайти будь-яку нотку!',
+s2t:'Сім ноток',s2:'До, ре, мі, фа, соль, ля, сі — сім білих клавіш. Вони живуть у двох будиночках: у малому троє, у великому четверо.',
+s3t:'Нота ДО',s3:'Знайди групу з двох чорних клавіш. Біла клавіша ліворуч від неї — це ДО!',
+s4t:'Октави',s4:'Нотки повторюються знову й знову: нижче гарчить лев, вище співає пташка. Одна така сімка — це октава.',
+g1:'Дахи й нотки — по місцях',g2:'7 октав і 7 звірят',g3:'Знайди пару',play:'Обирай гру',
+i1:'Перетягни дахи й нотки в будиночки. Або торкнись нотки, а потім її місця.',i2:'Заселяй дахи та ноти ДО й ФА в усі 7 октав. Гортай убік — там живуть усі звірята!',i3:'Відкривай картки: знайди нотку та її клавішу.',
+tr:'Дахи',tn:'Нотки',win:'Ти молодець!',w1:'Усі нотки розселені!',w2:'Усі октави заселені!',w3:'Усі пари знайдено!',again:'Ще раз',ok:'Чудово!',easy:'Легко',all:'Усі ноти',moves:'Ходи',au:'Автор',nm:"Мар'яна Вихрист"},
+ru:{n0:'Мир клавиш',n1:'Домики',n2:'Зоопарк октав',n3:'Мемо-клавиши',h1:'Привет! Это наш волшебный',h2:'мир клавиш',sub:'Узнай, где живёт каждая нотка, и подружись с пианино. Касайся клавиш — они играют!',cta:'Играть!',
+s1t:'Две и три',s1:'Чёрные клавиши стоят группами: по две и по три. Это наши крыши — по ним легко найти любую нотку!',
+s2t:'Семь нот',s2:'До, ре, ми, фа, соль, ля, си — семь белых клавиш. Они живут в двух домиках: в маленьком трое, в большом четверо.',
+s3t:'Нота ДО',s3:'Найди группу из двух чёрных клавиш. Белая клавиша слева от неё — это ДО!',
+s4t:'Октавы',s4:'Нотки повторяются снова и снова: ниже рычит лев, выше поёт птичка. Одна такая семёрка — это октава.',
+g1:'Крыши и нотки — по местам',g2:'7 октав и 7 зверят',g3:'Найди пару',play:'Выбирай игру',
+i1:'Перетащи крыши и нотки в домики. Или коснись нотки, а затем её места.',i2:'Расселяй крыши и ноты ДО и ФА по всем 7 октавам. Листай в сторону — там живут все зверята!',i3:'Открывай карточки: найди нотку и её клавишу.',
+tr:'Крыши',tn:'Нотки',win:'Ты молодец!',w1:'Все нотки расселены!',w2:'Все октавы заселены!',w3:'Все пары найдены!',again:'Ещё раз',ok:'Отлично!',easy:'Легко',all:'Все ноты',moves:'Ходы',au:'Автор',nm:'Марьяна Вихрист'},
+en:{n0:'Key World',n1:'Note Houses',n2:'Octave Zoo',n3:'Key Memo',h1:'Hi! Welcome to our magic',h2:'world of keys',sub:'Find out where every note lives and make friends with the piano. Tap the keys — they play!',cta:'Play!',
+s1t:'Twos and threes',s1:'Black keys come in groups of two and three. They are our roofs — they help you find any note!',
+s2t:'Seven notes',s2:'DO, RE, MI, FA, SOL, LA, SI — seven white keys. They live in two houses: three in the small one, four in the big one.',
+s3t:'Note DO',s3:'Look for two black keys together. The white key just left of them is DO!',
+s4t:'Octaves',s4:'The notes repeat again and again: a lion rumbles low, a little bird sings high. One set of seven is an octave.',
+g1:'Roofs and notes — home sweet home',g2:'7 octaves, 7 animals',g3:'Find the pair',play:'Pick a game',
+i1:'Drag the roofs and notes into the houses. Or tap a note, then its spot.',i2:'Place roofs and the notes DO and FA in all 7 octaves. Swipe sideways — all the animals live there!',i3:'Flip the cards: match a note with its key.',
+tr:'Roofs',tn:'Notes',win:'Well done!',w1:'All the notes found their homes!',w2:'Every octave is full!',w3:'All pairs found!',again:'Again',ok:'Great!',easy:'Easy',all:'All notes',moves:'Moves',au:'Author',nm:'Mariana Vykhryst'}};
+const NN={uk:['До','Ре','Мі','Фа','Соль','Ля','Сі'],ru:['До','Ре','Ми','Фа','Соль','Ля','Си'],en:['DO','RE','MI','FA','SOL','LA','SI']};
+const ANN={uk:['Лев','Слон','Корова','Діти','Мавпа','Заєць','Пташка'],ru:['Лев','Слон','Корова','Дети','Обезьяна','Заяц','Птичка'],en:['Lion','Elephant','Cow','Kids','Monkey','Hare','Bird']};
+const AN=[['🦁',.25],['🐘',.5],['🐄',1],['🧒',2],['🐒',4],['🐰',8],['🐦',16]];
+const COL=['#ff5a5f','#ff9f1c','#ffd23f','#3ddc84','#38bdf8','#5b6cff','#9b5de5'],RC={2:'#ff6fb5',3:'#19c3b5'};
+const F=[261.63,293.66,329.63,349.23,392,440,493.88];
+const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+let lang='uk',T=L.uk;
+try{lang=localStorage.getItem('brio-lang')||(/^ru/.test(navigator.language)?'ru':/^en/.test(navigator.language)?'en':'uk')}catch(e){}
+if(!L[lang])lang='uk';
+
+/* ---------- Sound: layered piano model (detuned strings, inharmonic partials, hammer, room) ---------- */
+let AC,OUT,NZ;
+function ac(){
+  if(!AC){
+    AC=new(window.AudioContext||window.webkitAudioContext)();
+    const comp=AC.createDynamicsCompressor(),wet=AC.createGain(),cv=AC.createConvolver(),n=AC.sampleRate*1.5,b=AC.createBuffer(2,n,AC.sampleRate);
+    for(let c=0;c<2;c++){const d=b.getChannelData(c);for(let i=0;i<n;i++)d[i]=(Math.random()*2-1)*(1-i/n)**3}
+    cv.buffer=b;wet.gain.value=.17;OUT=AC.createGain();OUT.gain.value=.9;
+    OUT.connect(comp);OUT.connect(cv);cv.connect(wet);wet.connect(comp);comp.connect(AC.destination);
+    NZ=AC.createBuffer(1,AC.sampleRate*.04,AC.sampleRate);const d=NZ.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=(Math.random()*2-1)*(1-i/d.length)**2;
+  }
+  if(AC.state==='suspended')AC.resume();
+  return AC;
+}
+function note(f,v=.8,delay=0){
+  try{
+    const a=ac(),t=a.currentTime+delay,dur=f<200?3.4:f<1000?2.6:1.5,g=a.createGain(),lp=a.createBiquadFilter();
+    lp.type='lowpass';lp.frequency.setValueAtTime(Math.min(11000,f*9+1800),t);lp.frequency.exponentialRampToValueAtTime(Math.min(3500,f*3+900),t+dur*.6);
+    g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(v*.42,t+.004);g.gain.exponentialRampToValueAtTime(.0001,t+dur);
+    g.connect(lp);lp.connect(OUT);
+    [1,.6,.42,.24,.15,.09,.05].forEach((amp,i)=>{
+      const n=i+1,fn=f*n*Math.sqrt(1+.0005*n*n);if(fn>12000)return;
+      const boost=f<160&&n>1&&n<5?1.7:1;
+      [-1,1].forEach(s=>{
+        const o=a.createOscillator(),pg=a.createGain();
+        o.frequency.value=fn;o.detune.value=s*(.9+n*.35);
+        pg.gain.setValueAtTime(amp*boost/2,t);pg.gain.exponentialRampToValueAtTime(.0001,t+dur/(1+i*.6));
+        o.connect(pg);pg.connect(g);o.start(t);o.stop(t+dur+.05);
+      });
+    });
+    const s=a.createBufferSource(),bp=a.createBiquadFilter(),ng=a.createGain();
+    s.buffer=NZ;bp.type='bandpass';bp.frequency.value=Math.min(f*3,3500);ng.gain.value=v*.3;
+    s.connect(bp);bp.connect(ng);ng.connect(OUT);s.start(t);
+  }catch(e){}
+}
+const chime=()=>{note(784,.4);note(1175,.35,.09)},bonk=()=>note(190,.25);
+const fanfare=()=>{[0,2,4].forEach((n,k)=>note(F[n],.7,k*.14));note(F[0]*2,.85,.46);note(F[4]*2,.6,.46)};
+
+/* ---------- Building blocks ---------- */
+const bub=i=>`<span class="nb" data-nl="${i}" style="--c:${COL[i]};color:${i>4?'#fff':'#2a2825'}">${NN[lang][i]}</span>`;
+const roof=k=>`<svg class="rf" viewBox="0 0 100 44" preserveAspectRatio="none" style="--c:${RC[k]}" aria-hidden="true"><path class="ch" d="${k==2?'M20 16V3h11v10':'M68 16V3h11v10'}Z"/><path class="rb" d="M1 43 15 13Q50-4 85 13L99 43Z"/><path class="rt" d="M14 31q6 7 12 0t12 0 12 0 12 0 12 0 12 0M6 40q6 7 12 0t12 0 12 0 12 0 12 0 12 0 12 0"/></svg><b class="dots" aria-hidden="true">${'●'.repeat(k)}</b>`;
+const kb=(c='')=>`<div class="kb ${c}">${[0,1,2,3,4,5,6].map(i=>`<button class="wk" data-k="${i}"></button>`).join('')}${[1,2,4,5,6].map(p=>`<i class="bk" style="--p:${p}"></i>`).join('')}</div>`;
+const mk=i=>`<span class="mk" style="--c:${COL[i]}">${[0,1,2,3,4,5,6].map(j=>`<i${j==i?' class="on"':''}></i>`).join('')}${[1,2,4,5,6].map(p=>`<b style="--p:${p}"></b>`).join('')}</span>`;
+const tok=(t,c,b)=>`<button class="tok ${t[0]=='r'?t:''}" data-t="${t}" ${c?'':'disabled'}>${t[0]=='r'?roof(t[1]):bub(+t[1])}${b&&c?`<em class="bd">${c}</em>`:''}</button>`;
+const head=(n,i)=>`<div class="gh"><div><h2 data-x="${n}"></h2><p data-x="${i}"></p></div><button class="btn sm rst" aria-label="Reset">↺</button></div>`;
+const roofSlots='<div class="roofs"><button class="rs" data-s="r2" style="left:0;width:42.857%">'+roof(2)+'</button><button class="rs" data-s="r3" style="left:42.857%;width:57.143%">'+roof(3)+'</button></div>';
+const ctl={};let cur=null,pg=0;
+
+/* ---------- Drag & drop (pointer events: mouse, touch, pen) + tap-to-place + keyboard ---------- */
+let sel=null,drag=null;
+function clearSel(){sel=null;document.body.classList.remove('arm');$$('.tok.on').forEach(e=>e.classList.remove('on'))}
+function pick(t){const was=sel===t;clearSel();if(!was){sel=t;t.classList.add('on');document.body.classList.add('arm')}}
+function hint(t){$$(`[data-s="${t}"]:not(.full)`).forEach(e=>{e.classList.add('hint');setTimeout(()=>e.classList.remove('hint'),1600)})}
+function drop(t,el){
+  const s=el&&el.closest&&el.closest('[data-s]');if(!s||!cur||!cur.drop)return;
+  if(cur.drop(t,s)<0){s.classList.add('shake');setTimeout(()=>s.classList.remove('shake'),450);hint(t);bonk()}
+}
+document.addEventListener('pointerdown',e=>{const t=e.target.closest('.tok');if(!t||t.disabled||e.button>0)return;ac();drag={t,x:e.clientX,y:e.clientY,g:null}});
+document.addEventListener('pointermove',e=>{
+  const d=drag;if(!d)return;
+  if(!d.g){if(Math.hypot(e.clientX-d.x,e.clientY-d.y)<8)return;clearSel();d.g=d.t.cloneNode(true);d.g.classList.add('ghost');d.g.classList.remove('on');document.body.append(d.g);d.t.classList.add('lift');document.body.classList.add('arm')}
+  d.g.style.translate=`${e.clientX}px ${e.clientY}px`;
+});
+document.addEventListener('pointerup',e=>{
+  const d=drag;drag=null;if(!d)return;
+  if(d.g){d.g.remove();d.t.classList.remove('lift');document.body.classList.remove('arm');drop(d.t.dataset.t,document.elementFromPoint(e.clientX,e.clientY))}
+  else pick(d.t);
+});
+document.addEventListener('pointercancel',()=>{if(drag){if(drag.g)drag.g.remove();drag.t.classList.remove('lift');drag=null;document.body.classList.remove('arm')}});
+function press(k){
+  const i=+k.dataset.k,c=k.closest('.oc');note(F[i]*(c?AN[+c.dataset.o][1]:1));
+  k.animate([{background:COL[i],translate:'0 4px'},{background:'#fff',translate:'0 0'}],{duration:380});
+}
+document.addEventListener('click',e=>{
+  const g=e.target.closest('[data-go]');if(g)return go(+g.dataset.go);
+  const l=e.target.closest('[data-l]');if(l)return setLang(l.dataset.l);
+  const tk=e.target.closest('.tok');if(tk){if(e.detail===0&&!tk.disabled)pick(tk);return}
+  if(e.target.closest('.rst'))return cur&&cur.reset&&cur.reset();
+  const a=e.target.closest('[data-sc]');if(a){const s=$('.sc');s.scrollBy({left:a.dataset.sc*s.clientWidth*.7,behavior:reduce?'auto':'smooth'});return}
+  const k=e.target.closest('.wk,.rs');if(!k)return;
+  if(sel&&k.dataset.s){const t=sel.dataset.t;clearSel();drop(t,k);return}
+  if(k.classList.contains('wk'))press(k);
+});
+
+/* ---------- Win celebration ---------- */
+function confetti(){
+  if(reduce)return;const box=$('#cfx');box.innerHTML='';
+  for(let i=0;i<54;i++){
+    const s=document.createElement('i');s.className='cf';s.textContent=['♪','♫','★','●','■'][i%5];
+    s.style.cssText=`left:${Math.random()*100}%;color:${COL[i%7]};font-size:${14+Math.random()*24}px`;box.append(s);
+    s.animate([{translate:'0 -10vh',rotate:'0deg'},{translate:`${Math.random()*160-80}px 112vh`,rotate:`${Math.random()*720-360}deg`}],{duration:2400+Math.random()*1800,delay:Math.random()*600,easing:'cubic-bezier(.3,.5,.6,1)',fill:'backwards'});
+  }
+  if(box.showPopover){try{box.showPopover()}catch(e){}setTimeout(()=>{try{box.hidePopover()}catch(e){}},5200)}
+}
+function win(key){
+  const d=$('#win');if(d.open)return;
+  $('#wt').textContent=T.win;$('#wd').textContent=T[key];d.returnValue='';d.showModal();fanfare();confetti();
+}
+$('#win').addEventListener('close',()=>{if($('#win').returnValue==='again'&&cur&&cur.reset)cur.reset()});
+
+/* ---------- Game 1: Note Houses ---------- */
+function b1(el){
+  const S={r2:0,r3:0,n:Array(7).fill(0)};
+  el.innerHTML=head('n1','i1')+`<div class="card tray"></div><div class="card board">${roofSlots}${kb()}</div>`;
+  $$('.wk',el).forEach((k,i)=>k.dataset.s='n'+i);
+  const tray=()=>{$('.tray',el).innerHTML=`<div class="grp"><small data-x="tr"></small>${['r2','r3'].map(t=>tok(t,S[t]?0:1)).join('')}</div><div class="grp"><small data-x="tn"></small>${S.n.map((v,i)=>tok('n'+i,v?0:1)).join('')}</div>`;applyLang()};
+  ctl[1]={
+    drop(t,s){
+      if(s.classList.contains('full'))return 0;if(s.dataset.s!==t)return -1;
+      s.classList.add('full');
+      if(t[0]=='r'){S[t]=1;chime()}else{const i=+t[1];S.n[i]=1;s.insertAdjacentHTML('beforeend',bub(i));note(F[i])}
+      tray();if(S.r2&&S.r3&&S.n.every(Boolean))setTimeout(()=>win('w1'),700);return 1;
+    },
+    reset:()=>b1(el)
+  };
+  cur=ctl[1];tray();
+}
+
+/* ---------- Game 2: Octave Zoo ---------- */
+function b2(el){
+  const S=AN.map(()=>({r2:0,r3:0,n0:0,n3:0})),rem=t=>7-S.filter(o=>o[t]).length;
+  el.innerHTML=head('n2','i2')+`<div class="card tray"></div><div class="nv"><button class="btn sm alt" data-sc="-1" aria-label="←">‹</button><button class="btn sm alt" data-sc="1" aria-label="→">›</button></div><div class="sc">${AN.map((a,i)=>`<article class="card oc" data-o="${i}"><div class="oh"><span class="an">${a[0]}</span><h3 data-an="${i}"></h3></div>${roofSlots}${kb()}</article>`).join('')}</div>`;
+  $$('.oc',el).forEach(c=>[0,3].forEach(i=>c.querySelectorAll('.wk')[i].dataset.s='n'+i));
+  const tray=()=>{$('.tray',el).innerHTML=`<div class="grp"><small data-x="tr"></small>${['r2','r3'].map(t=>tok(t,rem(t),1)).join('')}</div><div class="grp"><small data-x="tn"></small>${['n0','n3'].map(t=>tok(t,rem(t),1)).join('')}</div>`;applyLang()};
+  const center=c=>{const s=c.parentElement;s.scrollTo({left:c.offsetLeft-(s.clientWidth-c.offsetWidth)/2,behavior:reduce?'auto':'smooth'})};
+  ctl[2]={
+    drop(t,s){
+      if(s.classList.contains('full'))return 0;if(s.dataset.s!==t)return -1;
+      const c=s.closest('.oc'),oi=+c.dataset.o,o=S[oi];s.classList.add('full');o[t]=1;
+      if(t[0]=='r')chime();else{s.insertAdjacentHTML('beforeend',bub(+t[1]));note(F[+t[1]]*AN[oi][1])}
+      tray();
+      if(o.r2&&o.r3&&o.n0&&o.n3){
+        c.classList.add('done');const nx=$$('.oc',el).find(x=>!x.classList.contains('done'));
+        if(nx)setTimeout(()=>center(nx),500);else setTimeout(()=>win('w2'),700);
+      }
+      return 1;
+    },
+    reset:()=>b2(el)
+  };
+  cur=ctl[2];tray();
+}
+
+/* ---------- Game 3: Key Memo ---------- */
+function b3(el,n=4){
+  const ids=[0,1,2,3,4,5,6].sort(()=>Math.random()-.5).slice(0,n),cs=ids.flatMap(i=>[[i,0],[i,1]]).sort(()=>Math.random()-.5);
+  let first=null,lock=0,mv=0,found=0;
+  el.innerHTML=head('n3','i3')+`<div class="bar"><div class="seg">${[[4,'easy'],[7,'all']].map(([m,k])=>`<button class="btn sm${m==n?'':' alt'}" data-m="${m}" data-x="${k}"></button>`).join('')}</div><b class="mv"><span data-x="moves"></span>: <span id="mvn">0</span></b></div><div class="mg">${cs.map(([i,k])=>`<button class="mc" data-n="${i}"><span class="mi"><span class="fa">♪</span><span class="fb">${k?mk(i):bub(i)}</span></span></button>`).join('')}</div>`;
+  $('.seg',el).onclick=e=>{const b=e.target.closest('[data-m]');if(b)b3(el,+b.dataset.m)};
+  $('.mg',el).onclick=e=>{
+    const c=e.target.closest('.mc');if(!c||lock||c.classList.contains('up'))return;
+    c.classList.add('up');note(F[+c.dataset.n]);
+    if(!first){first=c;return}
+    const a=first;first=null;$('#mvn',el).textContent=++mv;
+    if(a.dataset.n===c.dataset.n){[a,c].forEach(x=>x.classList.add('ok'));chime();if(++found===n)setTimeout(()=>win('w3'),700)}
+    else{lock=1;setTimeout(()=>{a.classList.remove('up');c.classList.remove('up');lock=0},900)}
+  };
+  ctl[3]={reset:()=>b3(el,n)};cur=ctl[3];applyLang();
+}
+
+/* ---------- Navigation & language ---------- */
+const B=[null,b1,b2,b3],built=[];
+function go(i){
+  clearSel();
+  const sw=()=>{
+    $$('main>section').forEach((s,k)=>s.hidden=k!==i);
+    $$('.tab').forEach((t,k)=>t.setAttribute('aria-current',k===i?'page':'false'));
+    if(i&&!built[i]){built[i]=1;B[i]($('#p'+i))}
+    pg=i;cur=ctl[i]||null;scrollTo({top:0});applyLang();
+  };
+  document.startViewTransition&&!reduce?document.startViewTransition(sw):sw();
+}
+function applyLang(){
+  T=L[lang];document.documentElement.lang=lang;document.title='Brio · '+T.n0;
+  $$('[data-x]').forEach(e=>e.textContent=T[e.dataset.x]);
+  $$('[data-nl]').forEach(e=>e.textContent=NN[lang][+e.dataset.nl]);
+  $$('[data-an]').forEach(e=>e.textContent=ANN[lang][+e.dataset.an]);
+  $$('.wk').forEach(k=>k.setAttribute('aria-label',NN[lang][+k.dataset.k]));
+  $$('.tok').forEach(t=>t.setAttribute('aria-label',t.dataset.t[0]=='r'?T.tr+' '+t.dataset.t[1]:NN[lang][+t.dataset.t[1]]));
+  $$('.rs').forEach(r=>r.setAttribute('aria-label',T.tr+' '+r.dataset.s[1]));
+  $$('.lang button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.l===lang));
+}
+function setLang(l){lang=l;try{localStorage.setItem('brio-lang',l)}catch(e){}applyLang()}
+
+$('#hk').innerHTML=kb('hero');
+$$('#hk .wk').forEach((k,i)=>k.insertAdjacentHTML('beforeend',bub(i)));
+$('#yr').textContent=new Date().getFullYear();
+go(0);
+</script>
+</body>
+</html>
