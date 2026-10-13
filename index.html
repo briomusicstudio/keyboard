@@ -9,9 +9,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800&family=Rubik:wght@800;900&display=swap&subset=cyrillic" rel="stylesheet">
 <style>
-:root{--ink:#2a2825;--bg:#fff4dc;--y:#ffd23f;--i:#5b6cff}
+:root{--ink:#2a2825;--bg:#fff9ee;--y:#ffd23f;--i:#5b6cff}
 *{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
-body{font:600 clamp(15px,.6vw + 13px,18px)/1.5 Nunito,system-ui,sans-serif;color:var(--ink);background:var(--bg) radial-gradient(#2a282518 1.6px,transparent 1.7px) 0 0/24px 24px;min-height:100dvh;overflow-x:hidden}
+body{font:600 clamp(15px,.6vw + 13px,18px)/1.5 Nunito,system-ui,sans-serif;color:var(--ink);background:var(--bg);min-height:100dvh;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;z-index:-1;background:radial-gradient(circle at 12% 8%,#ffe08a 0,transparent 42%),radial-gradient(circle at 90% 18%,#a9e4ff 0,transparent 40%),radial-gradient(circle at 78% 92%,#ffc6e4 0,transparent 42%),radial-gradient(circle at 8% 85%,#c3f3d4 0,transparent 38%)}
 h1,h2,h3,.btn,.tab,small{font-family:Rubik,Nunito,system-ui,sans-serif;font-weight:900}
 :focus-visible{outline:4px solid var(--i);outline-offset:3px}
 button{font:inherit;color:inherit}
@@ -35,10 +36,17 @@ mark{background:var(--y);color:inherit;padding:0 .25em;border:3px solid var(--in
 .ht p{font-size:1.15em;margin-bottom:22px;max-width:34em}
 .hp{padding:clamp(14px,3vw,26px);position:relative;rotate:1.5deg;background:#cfeeff}
 .float{position:absolute;font:900 2rem Rubik;animation:bob 3s ease-in-out infinite}
-.bento{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:20px;margin:12px 0 36px}
-.bento .card{padding:22px;display:grid;gap:6px;align-content:start}
-.bento .card:nth-child(1){background:#ffe27a;rotate:-1deg}.bento .card:nth-child(2){background:#aee6ff;rotate:1deg}.bento .card:nth-child(3){background:#ffc2e2;rotate:-.8deg}.bento .card:nth-child(4){background:#b8f2cf;rotate:1.2deg}
-.bento span{font-size:2.4rem}h3{font-size:1.3rem}
+.story{display:grid;gap:26px;margin:8px 0 40px;counter-reset:c}
+.ch{counter-increment:c;display:grid;gap:20px;align-items:center;padding:clamp(18px,3vw,32px)}
+.ch:nth-child(1){background:#ffe9a6}.ch:nth-child(2){background:#bfe9ff}.ch:nth-child(3){background:#ffd0ea}.ch:nth-child(4){background:#c9f5da}.ch:nth-child(5){background:#e2d3ff}
+.num{display:inline-grid;place-items:center;width:46px;height:46px;border-radius:50%;background:var(--ink);color:#fff;font:900 1.3rem Rubik,sans-serif;margin-bottom:8px}.num::before{content:counter(c)}
+h3{font-size:1.3rem}.ch h3{font-size:clamp(1.4rem,3vw,2rem);margin-bottom:6px}.ch p{font-size:1.1em;max-width:30em}
+.ci{display:grid;justify-items:center;gap:10px}
+.ci .mk,.ci .rr{width:100%;max-width:440px}.ci .mk{height:clamp(110px,18vw,150px)}
+.rr{display:flex;height:clamp(40px,8vw,62px);margin-bottom:-4px}.rr span{position:relative;display:block}
+.mk.g b:nth-of-type(-n+2){background:#ff6fb5}.mk.g b:nth-of-type(n+3){background:#19c3b5}
+.zoo{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;align-items:flex-end}.zoo button{border:0;background:none;cursor:pointer;line-height:1;transition:translate .15s}.zoo button:hover{translate:0 -4px}
+@media(min-width:800px){.ch{grid-template-columns:1fr 1fr}.ch:nth-child(even) .ci{order:-1}}
 .sh{font-size:clamp(1.5rem,3vw,2.2rem);margin-bottom:16px}
 .games{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:20px}
 .gc{text-align:left;display:grid;gap:4px;padding:20px;cursor:pointer;font:inherit;transition:translate .15s}
@@ -48,10 +56,10 @@ mark{background:var(--y);color:inherit;padding:0 .25em;border:3px solid var(--in
 .wk{border:0;background:#fff;border-radius:0 0 16px 16px;display:flex;align-items:flex-end;justify-content:center;padding-bottom:10px;cursor:pointer;position:relative}
 .wk[data-s]:not(.full)::before{content:"";width:clamp(30px,5vw,44px);aspect-ratio:1;border:3px dashed #2a282566;border-radius:50%}
 .bk{position:absolute;top:0;left:calc(var(--p)/7*100% - 4.2%);width:8.4%;height:58%;background:linear-gradient(#4a453f,var(--ink));border-radius:0 0 10px 10px;box-shadow:inset 0 -7px 0 #5f5951;pointer-events:none}
-.kb.hero{height:clamp(150px,26vw,230px)}
+.kb.pk{height:clamp(150px,26vw,230px)}.pk .wk{padding-bottom:16px}.pk .bk{height:52%}
 .nb{display:grid;place-items:center;width:clamp(46px,7vw,58px);aspect-ratio:1;border-radius:50%;background:var(--c);border:3px solid var(--ink);box-shadow:0 4px 0 var(--ink);font:900 clamp(.8rem,2vw,1.05rem) Rubik,sans-serif}
 .wk .nb{animation:pop .45s cubic-bezier(.3,1.6,.5,1)}
-.hero .wk .nb{width:clamp(30px,6vw,44px);font-size:clamp(.55rem,1.7vw,.85rem);box-shadow:none;animation:none}
+.pk .wk .nb{width:clamp(30px,6vw,44px);font-size:clamp(.55rem,1.7vw,.85rem);box-shadow:none;animation:none}
 /* games */
 .gh{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;margin-bottom:14px}
 .gh h2{font-size:clamp(1.6rem,3.4vw,2.4rem)}.gh p{max-width:44em}
@@ -63,7 +71,7 @@ mark{background:var(--y);color:inherit;padding:0 .25em;border:3px solid var(--in
 .tok.r2{width:96px;height:48px}.tok.r3{width:128px;height:48px}
 .ghost{position:fixed;left:0;top:0;margin:-28px 0 0 -28px;pointer-events:none;z-index:99;scale:1.15;rotate:-6deg;filter:drop-shadow(4px 6px 0 #2a282844)}
 .bd{position:absolute;top:-9px;right:-9px;min-width:25px;height:25px;padding:0 5px;background:var(--y);border:2px solid var(--ink);border-radius:13px;font:900 .8rem Rubik,sans-serif;display:grid;place-items:center;font-style:normal}
-.board{padding:clamp(14px,3vw,30px);background:#d9f3ff}
+.board{position:relative;padding:clamp(14px,3vw,30px);background:#d9f3ff}
 .roofs{position:relative;height:clamp(58px,13vw,100px);margin-bottom:-3px}
 .rs{position:absolute;bottom:0;height:100%;border:0;background:none;padding:0 3px}
 .rf{width:100%;height:100%;display:block}
@@ -93,6 +101,18 @@ body.arm .wk[data-s]:not(.full),body.arm .rs:not(.full){outline:3px dashed var(-
 .fb .nb{width:62%;font-size:clamp(.8rem,3vw,1.3rem)}
 .mk{position:relative;display:grid;grid-template-columns:repeat(7,1fr);width:86%;height:62%;border:2px solid var(--ink);border-radius:6px 6px 12px 12px;overflow:hidden;background:var(--ink);gap:1.5px}
 .mk i{background:#fff}.mk i.on{background:var(--c)}.mk b{position:absolute;top:0;left:calc(var(--p)/7*100% - 4.5%);width:9%;height:58%;background:var(--ink);border-radius:0 0 3px 3px}
+.q{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;padding:14px 18px;margin-bottom:18px;background:#fff8d6;font:900 clamp(1.3rem,3.6vw,2rem) Rubik,sans-serif}
+.q .nb{width:clamp(60px,10vw,84px);font-size:clamp(1.1rem,3vw,1.6rem)}
+.pd{display:flex;gap:8px;justify-content:center;margin-bottom:16px}.pd i{width:18px;height:18px;border-radius:50%;border:3px solid var(--ink);background:#fff}.pd i.on{background:#3ddc84}
+.opts{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;max-width:560px;margin:22px auto 0}
+@media(min-width:640px){.opts{grid-template-columns:repeat(4,1fr);max-width:none}}
+.opt{background:#fff;border:3px solid var(--ink);border-radius:24px;padding:16px;box-shadow:0 5px 0 var(--ink);cursor:pointer;display:grid;place-items:center;transition:translate .1s}
+.opt:active{translate:0 4px;box-shadow:0 1px 0 var(--ink)}.opt .nb{width:clamp(56px,10vw,76px);font-size:clamp(1rem,2.6vw,1.4rem)}
+.opt.bad{animation:shake .4s;background:#ffd6d6;opacity:.6;pointer-events:none}
+.wk.mark{background:#fff3b0}.wk.mark::after{content:"🎵";font-size:clamp(1.3rem,4vw,2.2rem);animation:bob 1s ease-in-out infinite}
+.fx{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none;z-index:5}
+.fx b{display:grid;place-items:center;width:clamp(90px,22vw,150px);aspect-ratio:1;border-radius:50%;border:4px solid var(--ink);font:900 clamp(3rem,10vw,5.5rem)/1 Rubik,sans-serif;color:#fff;box-shadow:6px 6px 0 var(--ink);animation:fx .9s ease-out forwards}
+.fx.ok b{background:#3ddc84}.fx.no b{background:#ff5a5f;animation:fx .9s ease-out forwards,shake .4s .1s}
 /* footer, dock, dialog */
 footer{max-width:1180px;margin:40px auto 0;padding:24px clamp(12px,4vw,40px) 130px;display:grid;justify-items:center;gap:14px;text-align:center}
 footer img{height:64px;width:auto}
@@ -101,9 +121,10 @@ footer img{height:64px;width:auto}
 .soc a:hover{translate:0 -2px}.soc a:nth-child(1){background:#ffc2e2}.soc a:nth-child(2){background:#aee6ff}.soc a:nth-child(3){background:var(--y)}
 footer small{font-weight:800;opacity:.75}
 .dock{position:fixed;left:50%;bottom:max(12px,env(safe-area-inset-bottom));translate:-50% 0;z-index:30;display:flex;gap:4px;padding:6px;background:#fff;border:3px solid var(--ink);border-radius:28px;box-shadow:0 5px 0 var(--ink);max-width:calc(100vw - 16px)}
-.tab{border:0;background:none;border-radius:22px;padding:6px 6px;min-width:66px;display:grid;justify-items:center;gap:2px;font-size:11px;line-height:1.1;cursor:pointer}
+.tab{flex:1 1 0;min-width:0;border:0;background:none;border-radius:22px;padding:6px 2px;display:grid;justify-items:center;align-content:start;gap:2px;font-size:10px;line-height:1.1;cursor:pointer;text-align:center}.tab span{overflow-wrap:anywhere}
 .tab i{font-style:normal;font-size:22px}.tab[aria-current=page]{background:var(--y)}
-@media(min-width:640px){.tab{grid-auto-flow:column;align-items:center;font-size:14px;gap:8px;padding:10px 18px}}
+@media(min-width:640px){.tab{grid-auto-flow:column;align-items:center;align-content:center;font-size:14px;gap:8px;padding:10px 14px}}
+@media(max-width:899px){.dock{width:calc(100vw - 16px)}}
 dialog{border:3px solid var(--ink);border-radius:32px;box-shadow:8px 8px 0 var(--ink);padding:clamp(24px,5vw,40px);margin:auto;width:min(92vw,460px);text-align:center;background:#fff;overflow:hidden;position:relative;color:var(--ink)}
 dialog[open]{animation:pop .5s cubic-bezier(.3,1.6,.5,1)}
 dialog::backdrop{background:#2a282499;backdrop-filter:blur(4px)}
@@ -118,7 +139,9 @@ dialog form{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
 @keyframes hp{50%{scale:1.07}}
 @keyframes bob{50%{translate:0 -8px}}
 @keyframes spin{to{rotate:360deg}}
-@media(prefers-reduced-motion:reduce){.burst,.wm,.float{animation:none}.wk .nb,.rs.full .rf,dialog[open],.hint,.mc.ok{animation:none}.mi{transition:none}.tok,.btn,.gc{transition:none}}
+@keyframes fx{0%{scale:.2;opacity:0}25%{scale:1.15;opacity:1}40%{scale:1}85%{opacity:1}100%{opacity:0}}
+@keyframes fx2{0%,85%{opacity:1}100%{opacity:0}}
+@media(prefers-reduced-motion:reduce){.burst,.wm,.float{animation:none}.wk .nb,.rs.full .rf,dialog[open],.hint,.mc.ok{animation:none}.mi{transition:none}.tok,.btn,.gc{transition:none}.fx.ok b,.fx.no b{animation:fx2 .9s forwards}.wk.mark::after{animation:none}}
 </style>
 </head>
 <body>
@@ -136,22 +159,27 @@ dialog form{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
       </div>
       <div class="card hp"><span class="float" style="top:-18px;left:12px;color:#ff5a5f">♪</span><span class="float" style="top:-22px;right:30px;color:#5b6cff;animation-delay:-1s">♫</span><div id="hk"></div></div>
     </div>
-    <div class="bento">
-      <article class="card"><span>🏠</span><h3 data-x="s1t"></h3><p data-x="s1"></p></article>
-      <article class="card"><span>🎹</span><h3 data-x="s2t"></h3><p data-x="s2"></p></article>
-      <article class="card"><span>🔍</span><h3 data-x="s3t"></h3><p data-x="s3"></p></article>
-      <article class="card"><span>🦁</span><h3 data-x="s4t"></h3><p data-x="s4"></p></article>
+    <div class="story">
+      <article class="card ch"><div class="ct"><b class="num"></b><h3 data-x="c1t"></h3><p data-x="c1"></p></div><div class="ci" id="ci1"></div></article>
+      <article class="card ch"><div class="ct"><b class="num"></b><h3 data-x="c2t"></h3><p data-x="c2"></p></div><div class="ci" id="ci2"></div></article>
+      <article class="card ch"><div class="ct"><b class="num"></b><h3 data-x="c3t"></h3><p data-x="c3"></p></div><div class="ci" id="ci3"></div></article>
+      <article class="card ch"><div class="ct"><b class="num"></b><h3 data-x="c4t"></h3><p data-x="c4"></p></div><div class="ci" id="ci4"></div></article>
+      <article class="card ch"><div class="ct"><b class="num"></b><h3 data-x="c5t"></h3><p data-x="c5"></p></div><div class="ci" id="ci5"></div></article>
     </div>
     <h2 class="sh" data-x="play"></h2>
     <div class="games">
       <button class="card gc" data-go="1" style="background:#ffe27a"><i>🏡</i><b data-x="n1"></b><span data-x="g1"></span></button>
       <button class="card gc" data-go="2" style="background:#aee6ff"><i>🐘</i><b data-x="n2"></b><span data-x="g2"></span></button>
       <button class="card gc" data-go="3" style="background:#ffc2e2"><i>🃏</i><b data-x="n3"></b><span data-x="g3"></span></button>
+      <button class="card gc" data-go="4" style="background:#b8f2cf"><i>🔎</i><b data-x="n4"></b><span data-x="g4"></span></button>
+      <button class="card gc" data-go="5" style="background:#d9c8ff"><i>🎯</i><b data-x="n5"></b><span data-x="g5"></span></button>
     </div>
   </section>
   <section id="p1" hidden></section>
   <section id="p2" hidden></section>
   <section id="p3" hidden></section>
+  <section id="p4" hidden></section>
+  <section id="p5" hidden></section>
 </main>
 <footer>
   <img src="brio-logo.svg" alt="Brio Music Studio">
@@ -167,6 +195,8 @@ dialog form{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
   <button class="tab" data-go="1"><i>🏡</i><span data-x="n1"></span></button>
   <button class="tab" data-go="2"><i>🦁</i><span data-x="n2"></span></button>
   <button class="tab" data-go="3"><i>🃏</i><span data-x="n3"></span></button>
+  <button class="tab" data-go="4"><i>🔎</i><span data-x="n4"></span></button>
+  <button class="tab" data-go="5"><i>🎯</i><span data-x="n5"></span></button>
 </nav>
 <dialog id="win"><div class="burst"></div><div class="wm">🎹</div><h2 id="wt"></h2><p id="wd"></p>
   <form method="dialog"><button class="btn alt" value="again" data-x="again"></button><button class="btn" value="ok" data-x="ok"></button></form></dialog>
@@ -176,28 +206,34 @@ dialog form{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
 const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
 const L={
 uk:{n0:'Світ клавіш',n1:'Будиночки',n2:'Зоопарк октав',n3:'Мемо-клавіші',h1:'Привіт! Це наш чарівний',h2:'світ клавіш',sub:'Дізнайся, де живе кожна нотка, і подружись із піаніно. Торкайся клавіш — вони грають!',cta:'Грати!',
-s1t:'Дві й три',s1:'Чорні клавіші стоять групами: по дві та по три. Це наші дахи — за ними легко знайти будь-яку нотку!',
-s2t:'Сім ноток',s2:'До, ре, мі, фа, соль, ля, сі — сім білих клавіш. Вони живуть у двох будиночках: у малому троє, у великому четверо.',
-s3t:'Нота ДО',s3:'Знайди групу з двох чорних клавіш. Біла клавіша ліворуч від неї — це ДО!',
-s4t:'Октави',s4:'Нотки повторюються знову й знову: нижче гарчить лев, вище співає пташка. Одна така сімка — це октава.',
+c1t:'Жили-були клавіші',c1:'На піаніно живуть білі й чорні клавіші. Вони стоять поруч і разом співають мелодії.',
+c2t:'Чорні сусіди',c2:'Чорні клавіші не люблять самотності — вони тримаються групками: двоє разом і трійка поруч.',
+c3t:'Два будиночки',c3:'Над кожною групкою — дах. Під малим дахом оселилися троє нот, а під великим — четверо.',
+c4t:'Знайомтеся: нота ДО',c4:'Хочеш знайти ДО? Шукай двох чорних сусідів — ДО живе на білій клавіші ліворуч від них.',
+c5t:'Подорож октавами',c5:'Сім ноток — це одна октава. Далі все повторюється: внизу гарчить лев, угорі співає пташка. Торкнись звірят!',
 g1:'Дахи й нотки — по місцях',g2:'7 октав і 7 звірят',g3:'Знайди пару',play:'Обирай гру',
 i1:'Перетягни дахи й нотки в будиночки. Або торкнись нотки, а потім її місця.',i2:'Заселяй дахи та ноти ДО й ФА в усі 7 октав. Гортай убік — там живуть усі звірята!',i3:'Відкривай картки: знайди нотку та її клавішу.',
+n4:'Яка нота?',n5:'Зіграй ноту',g4:'Яка це нота?',g5:'Знайди ноту на клавіатурі',i4:'Подивись на клавішу з 🎵 і обери правильну нотку.',i5:'Знайди на клавіатурі ту нотку, про яку питають. 7 нот — 7 запитань!',q4:'Яка це нота?',q5:'Зіграй ноту',w4:'Усі ноти впізнано!',w5:'Усі ноти зіграно!',
 tr:'Дахи',tn:'Нотки',win:'Ти молодець!',w1:'Усі нотки розселені!',w2:'Усі октави заселені!',w3:'Усі пари знайдено!',again:'Ще раз',ok:'Чудово!',easy:'Легко',all:'Усі ноти',moves:'Ходи',au:'Автор',nm:"Мар'яна Вихрист"},
 ru:{n0:'Мир клавиш',n1:'Домики',n2:'Зоопарк октав',n3:'Мемо-клавиши',h1:'Привет! Это наш волшебный',h2:'мир клавиш',sub:'Узнай, где живёт каждая нотка, и подружись с пианино. Касайся клавиш — они играют!',cta:'Играть!',
-s1t:'Две и три',s1:'Чёрные клавиши стоят группами: по две и по три. Это наши крыши — по ним легко найти любую нотку!',
-s2t:'Семь нот',s2:'До, ре, ми, фа, соль, ля, си — семь белых клавиш. Они живут в двух домиках: в маленьком трое, в большом четверо.',
-s3t:'Нота ДО',s3:'Найди группу из двух чёрных клавиш. Белая клавиша слева от неё — это ДО!',
-s4t:'Октавы',s4:'Нотки повторяются снова и снова: ниже рычит лев, выше поёт птичка. Одна такая семёрка — это октава.',
+c1t:'Жили-были клавиши',c1:'На пианино живут белые и чёрные клавиши. Они стоят рядом и вместе поют мелодии.',
+c2t:'Чёрные соседи',c2:'Чёрные клавиши не любят одиночества — они держатся группками: двое вместе и тройка рядом.',
+c3t:'Два домика',c3:'Над каждой группкой — крыша. Под маленькой крышей поселились три ноты, а под большой — четыре.',
+c4t:'Знакомьтесь: нота ДО',c4:'Хочешь найти ДО? Ищи двух чёрных соседей — ДО живёт на белой клавише слева от них.',
+c5t:'Путешествие по октавам',c5:'Семь ноток — это одна октава. Дальше всё повторяется: внизу рычит лев, вверху поёт птичка. Коснись зверят!',
 g1:'Крыши и нотки — по местам',g2:'7 октав и 7 зверят',g3:'Найди пару',play:'Выбирай игру',
 i1:'Перетащи крыши и нотки в домики. Или коснись нотки, а затем её места.',i2:'Расселяй крыши и ноты ДО и ФА по всем 7 октавам. Листай в сторону — там живут все зверята!',i3:'Открывай карточки: найди нотку и её клавишу.',
+n4:'Какая нота?',n5:'Сыграй ноту',g4:'Какая это нота?',g5:'Найди ноту на клавиатуре',i4:'Посмотри на клавишу с 🎵 и выбери правильную нотку.',i5:'Найди на клавиатуре ту нотку, о которой спрашивают. 7 нот — 7 вопросов!',q4:'Какая это нота?',q5:'Сыграй ноту',w4:'Все ноты узнаны!',w5:'Все ноты сыграны!',
 tr:'Крыши',tn:'Нотки',win:'Ты молодец!',w1:'Все нотки расселены!',w2:'Все октавы заселены!',w3:'Все пары найдены!',again:'Ещё раз',ok:'Отлично!',easy:'Легко',all:'Все ноты',moves:'Ходы',au:'Автор',nm:'Марьяна Вихрист'},
 en:{n0:'Key World',n1:'Note Houses',n2:'Octave Zoo',n3:'Key Memo',h1:'Hi! Welcome to our magic',h2:'world of keys',sub:'Find out where every note lives and make friends with the piano. Tap the keys — they play!',cta:'Play!',
-s1t:'Twos and threes',s1:'Black keys come in groups of two and three. They are our roofs — they help you find any note!',
-s2t:'Seven notes',s2:'DO, RE, MI, FA, SOL, LA, SI — seven white keys. They live in two houses: three in the small one, four in the big one.',
-s3t:'Note DO',s3:'Look for two black keys together. The white key just left of them is DO!',
-s4t:'Octaves',s4:'The notes repeat again and again: a lion rumbles low, a little bird sings high. One set of seven is an octave.',
+c1t:'Once upon a time, there were keys',c1:'A piano is home to white and black keys. They stand side by side and sing melodies together.',
+c2t:'The black neighbours',c2:'Black keys hate being alone, so they stick together: two in one group and three in the next.',
+c3t:'Two little houses',c3:'Every group wears a roof. Three notes live under the small roof and four under the big one.',
+c4t:'Meet the note DO',c4:'Want to find DO? Look for two black neighbours — DO lives on the white key just to their left.',
+c5t:'A trip through octaves',c5:'Seven notes make one octave. Then it all repeats: a lion rumbles low, a little bird sings high. Tap the animals!',
 g1:'Roofs and notes — home sweet home',g2:'7 octaves, 7 animals',g3:'Find the pair',play:'Pick a game',
 i1:'Drag the roofs and notes into the houses. Or tap a note, then its spot.',i2:'Place roofs and the notes DO and FA in all 7 octaves. Swipe sideways — all the animals live there!',i3:'Flip the cards: match a note with its key.',
+n4:'Which note?',n5:'Play the note',g4:'Which note is it?',g5:'Find the note on the keys',i4:'Look at the key with the 🎵 and pick the right note.',i5:'Find the asked note on the keyboard. 7 notes — 7 questions!',q4:'Which note is it?',q5:'Play the note',w4:'All notes recognised!',w5:'All notes played!',
 tr:'Roofs',tn:'Notes',win:'Well done!',w1:'All the notes found their homes!',w2:'Every octave is full!',w3:'All pairs found!',again:'Again',ok:'Great!',easy:'Easy',all:'All notes',moves:'Moves',au:'Author',nm:'Mariana Vykhryst'}};
 const NN={uk:['До','Ре','Мі','Фа','Соль','Ля','Сі'],ru:['До','Ре','Ми','Фа','Соль','Ля','Си'],en:['DO','RE','MI','FA','SOL','LA','SI']};
 const ANN={uk:['Лев','Слон','Корова','Діти','Мавпа','Заєць','Пташка'],ru:['Лев','Слон','Корова','Дети','Обезьяна','Заяц','Птичка'],en:['Lion','Elephant','Cow','Kids','Monkey','Hare','Bird']};
@@ -251,7 +287,7 @@ const fanfare=()=>{[0,2,4].forEach((n,k)=>note(F[n],.7,k*.14));note(F[0]*2,.85,.
 const bub=i=>`<span class="nb" data-nl="${i}" style="--c:${COL[i]};color:${i>4?'#fff':'#2a2825'}">${NN[lang][i]}</span>`;
 const roof=k=>`<svg class="rf" viewBox="0 0 100 44" preserveAspectRatio="none" style="--c:${RC[k]}" aria-hidden="true"><path class="ch" d="${k==2?'M20 16V3h11v10':'M68 16V3h11v10'}Z"/><path class="rb" d="M1 43 15 13Q50-4 85 13L99 43Z"/><path class="rt" d="M14 31q6 7 12 0t12 0 12 0 12 0 12 0 12 0M6 40q6 7 12 0t12 0 12 0 12 0 12 0 12 0 12 0"/></svg><b class="dots" aria-hidden="true">${'●'.repeat(k)}</b>`;
 const kb=(c='')=>`<div class="kb ${c}">${[0,1,2,3,4,5,6].map(i=>`<button class="wk" data-k="${i}"></button>`).join('')}${[1,2,4,5,6].map(p=>`<i class="bk" style="--p:${p}"></i>`).join('')}</div>`;
-const mk=i=>`<span class="mk" style="--c:${COL[i]}">${[0,1,2,3,4,5,6].map(j=>`<i${j==i?' class="on"':''}></i>`).join('')}${[1,2,4,5,6].map(p=>`<b style="--p:${p}"></b>`).join('')}</span>`;
+const mk=(i,c='')=>`<span class="mk ${c}" style="--c:${COL[i]||'#fff'}">${[0,1,2,3,4,5,6].map(j=>`<i${j==i?' class="on"':''}></i>`).join('')}${[1,2,4,5,6].map(p=>`<b style="--p:${p}"></b>`).join('')}</span>`;
 const tok=(t,c,b)=>`<button class="tok ${t[0]=='r'?t:''}" data-t="${t}" ${c?'':'disabled'}>${t[0]=='r'?roof(t[1]):bub(+t[1])}${b&&c?`<em class="bd">${c}</em>`:''}</button>`;
 const head=(n,i)=>`<div class="gh"><div><h2 data-x="${n}"></h2><p data-x="${i}"></p></div><button class="btn sm rst" aria-label="Reset">↺</button></div>`;
 const roofSlots='<div class="roofs"><button class="rs" data-s="r2" style="left:0;width:42.857%">'+roof(2)+'</button><button class="rs" data-s="r3" style="left:42.857%;width:57.143%">'+roof(3)+'</button></div>';
@@ -288,6 +324,7 @@ document.addEventListener('click',e=>{
   const tk=e.target.closest('.tok');if(tk){if(e.detail===0&&!tk.disabled)pick(tk);return}
   if(e.target.closest('.rst'))return cur&&cur.reset&&cur.reset();
   const a=e.target.closest('[data-sc]');if(a){const s=$('.sc');s.scrollBy({left:a.dataset.sc*s.clientWidth*.7,behavior:reduce?'auto':'smooth'});return}
+  const z=e.target.closest('[data-a]');if(z){note(F[0]*AN[+z.dataset.a][1]);z.animate([{scale:1.3},{scale:1}],{duration:300});return}
   const k=e.target.closest('.wk,.rs');if(!k)return;
   if(sel&&k.dataset.s){const t=sel.dataset.t;clearSel();drop(t,k);return}
   if(k.classList.contains('wk'))press(k);
@@ -368,8 +405,37 @@ function b3(el,n=4){
   ctl[3]={reset:()=>b3(el,n)};cur=ctl[3];applyLang();
 }
 
+/* ---------- Games 4 & 5: Which note? / Play the note ---------- */
+const fx=(el,ok)=>{const d=document.createElement('div');d.className='fx '+(ok?'ok':'no');d.innerHTML='<b>'+(ok?'✓':'✕')+'</b>';$('.board',el).append(d);setTimeout(()=>d.remove(),950)};
+const shuf=a=>[...a].sort(()=>Math.random()-.5),pdots=()=>'<div class="pd">'+'<i></i>'.repeat(7)+'</div>';
+function b4(el){
+  const q=shuf([0,1,2,3,4,5,6]);let n=0,lock=0;
+  el.innerHTML=head('n4','i4')+`<div class="card q"><span data-x="q4"></span></div>${pdots()}<div class="card board">${kb()}<div class="opts"></div></div>`;
+  const ask=()=>{
+    const c=q[n],o=shuf([c,...shuf([0,1,2,3,4,5,6].filter(x=>x!=c)).slice(0,3)]);
+    $$('.wk',el).forEach((k,i)=>k.classList.toggle('mark',i==c));
+    $('.opts',el).innerHTML=o.map(i=>`<button class="opt" data-n="${i}">${bub(i)}</button>`).join('');lock=0;applyLang();
+  };
+  $('.opts',el).onclick=e=>{
+    const b=e.target.closest('.opt');if(!b||lock)return;const i=+b.dataset.n;
+    if(i===q[n]){lock=1;fx(el,1);chime();note(F[i],.7,.1);$$('.pd i',el)[n].classList.add('on');n++;if(n<7)setTimeout(ask,950);else setTimeout(()=>win('w4'),900)}
+    else{fx(el,0);b.classList.add('bad');bonk()}
+  };
+  ctl[4]={reset:()=>b4(el)};cur=ctl[4];ask();
+}
+function b5(el){
+  const q=shuf([0,1,2,3,4,5,6]);let n=0,lock=0;
+  el.innerHTML=head('n5','i5')+`<div class="card q"><span data-x="q5"></span>${bub(q[0])}</div>${pdots()}<div class="card board">${kb()}</div>`;
+  $('.kb',el).addEventListener('click',e=>{
+    const k=e.target.closest('.wk');if(!k||lock)return;const i=+k.dataset.k;
+    if(i===q[n]){lock=1;fx(el,1);chime();$$('.pd i',el)[n].classList.add('on');n++;if(n<7)setTimeout(()=>{$('.q .nb',el).outerHTML=bub(q[n]);lock=0},950);else setTimeout(()=>win('w5'),900)}
+    else fx(el,0);
+  });
+  ctl[5]={reset:()=>b5(el)};cur=ctl[5];applyLang();
+}
+
 /* ---------- Navigation & language ---------- */
-const B=[null,b1,b2,b3],built=[];
+const B=[null,b1,b2,b3,b4,b5],built=[];
 function go(i){
   clearSel();
   const sw=()=>{
@@ -388,13 +454,19 @@ function applyLang(){
   $$('.wk').forEach(k=>k.setAttribute('aria-label',NN[lang][+k.dataset.k]));
   $$('.tok').forEach(t=>t.setAttribute('aria-label',t.dataset.t[0]=='r'?T.tr+' '+t.dataset.t[1]:NN[lang][+t.dataset.t[1]]));
   $$('.rs').forEach(r=>r.setAttribute('aria-label',T.tr+' '+r.dataset.s[1]));
+  $$('[data-a]').forEach(z=>z.setAttribute('aria-label',ANN[lang][+z.dataset.a]));
   $$('.lang button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.l===lang));
 }
 function setLang(l){lang=l;try{localStorage.setItem('brio-lang',l)}catch(e){}applyLang()}
 
-$('#hk').innerHTML=kb('hero');
+$('#hk').innerHTML=kb('pk');
 $$('#hk .wk').forEach((k,i)=>k.insertAdjacentHTML('beforeend',bub(i)));
 $('#yr').textContent=new Date().getFullYear();
+const mka=()=>`<span class="mk">${COL.map(c=>`<i style="background:${c}"></i>`).join('')}${[1,2,4,5,6].map(p=>`<b style="--p:${p}"></b>`).join('')}</span>`;
+$('#ci1').innerHTML=mk(-1);$('#ci2').innerHTML=mk(-1,'g');
+$('#ci3').innerHTML=`<div class="rr"><span style="width:42.857%">${roof(2)}</span><span style="width:57.143%">${roof(3)}</span></div>${mka()}`;
+$('#ci4').innerHTML=mk(0,'g')+bub(0);
+$('#ci5').innerHTML=`<div class="zoo">${AN.map((a,i)=>`<button data-a="${i}" style="font-size:${2.7-i*.22}rem">${a[0]}</button>`).join('')}</div>`;
 go(0);
 </script>
 </body>
